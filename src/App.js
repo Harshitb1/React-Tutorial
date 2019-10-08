@@ -2,25 +2,43 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// class App extends React.Component {
+//   state =  {
+//     allTodos:[
+//       {name:  "Hi",id: "1"},
+//       {name:"Yo", id: "2"}
+//     ]
+//   }
+//   console.log(this.state.allTodos)
+//   return (
 
+//     <div className="App">
+//       {/* {this.state.allTodos} */}
+//     </div>
+
+//   );
+// }
+var todos=[];
+//  renderTodos=()=>{
+   
+//  }
+
+class App extends React.Component {
+  state =  {
+        allTodos:[
+          {name:"Hi",id: "1"},
+          {name:"Yo", id: "2"}
+        ]
+      }
+     
+  render() {
+    
+    return this.state.allTodos.map(todo=>(
+      <div> {todo.id}. {todo.name}</div>
+      ));  
+   
+ 
+  }
+
+}
 export default App;
