@@ -6,8 +6,8 @@ import './App.css';
 class App extends React.Component {
   state =  {
     allTodos:[
-      {name:"Hi",id: "1"},
-      {name:"Yo", id: "2"}
+      {name:"Meet Alexa on 10th",id: "1"},
+      {name:"Buy apple", id: "2"}
     ],
     newTodo:""
   }
@@ -22,9 +22,13 @@ class App extends React.Component {
     this.setState({[e.target.name]:e.target.value})
   }
 
+  addNewTodo=()=>{
+    return {name:this.state.newTodo,id:this.state.allTodos.length+1}
+  }
+
   onSubmit= (e)=>{
     e.preventDefault();
-    this.setState({allTodos:[...this.state.allTodos,{name:this.state.newTodo,id:this.state.allTodos.length+1}]})    
+    this.setState({allTodos:[...this.state.allTodos,this.addNewTodo()]})    
     this.setState({ newTodo:""})
 
   }
@@ -40,7 +44,7 @@ class App extends React.Component {
         
           <input 
           name="newTodo"
-          placeholder="meet samanyu" 
+          placeholder="meet sam" 
           value = {this.state.newTodo}
           onChange={this.onChange}
           />
