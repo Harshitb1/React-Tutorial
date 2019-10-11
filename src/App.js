@@ -1,6 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import AllTodos from './components/AllTodos';
+import AddTodo from './components/AddTodo';
+
 
 // class based component
 class App extends React.Component {
@@ -22,41 +26,31 @@ class App extends React.Component {
     this.setState({[e.target.name]:e.target.value})
   }
 
-  addNewTodo=()=>{
-    return {name:this.state.newTodo,id:this.state.allTodos.length+1}
-  }
-
-  onSubmit= (e)=>{
-    e.preventDefault();
-    this.setState({allTodos:[...this.state.allTodos,this.addNewTodo()]})    
-    this.setState({ newTodo:""})
-
+  addNewTodo=(todo)=>{
+    console.log("new todo :"+ todo)
+    return this.setState({allTodos:[...this.state.allTodos,{name:todo,id:this.state.allTodos.length+1}]})    
   }
      
   render() {
     
     return (
-      <div>
-
-        {this.renderTodos()}
+      <Router>
+        <div>
+        <Route
+         exact
+         path="/"
+         component={()=><AllTodos  allTodos={this.state.allTodos}/>}
         
-        <form onSubmit={this.onSubmit}>
-        
-          <input 
-          name="newTodo"
-          placeholder="meet sam" 
-          value = {this.state.newTodo}
-          onChange={this.onChange}
-          />
+        />
+        {/* {this.renderTodos()} */}
+        <Route 
+        exact
+        path="/add"
+        component={()=><AddTodo addNewTodo={this.addNewTodo}/>}
+        />
+        </div>
 
-          <input
-          type="submit"
-          value="add ToDo"
-          />
-
-        </form>
-
-      </div>
+      </Router>
       );   
   }
 
