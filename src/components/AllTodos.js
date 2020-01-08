@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 class AddTodo extends React.Component{
 
@@ -14,22 +13,27 @@ class AddTodo extends React.Component{
 
     renderTodos=(allTodos)=>{
         return allTodos.map(todo=>(
-          <div> {todo.id}. {todo.name}</div>
+            <li class="list-group-item" key={todo.id}> {todo.id}. {todo.name}</li>
+
+        //   <div key={todo.id}> {todo.id}. {todo.name}</div>
         ))
     }
 
     render(){
        
         return(
-            <div>
-            <div>
-            {this.renderTodos(this.props.allTodos)}
+            <div className="container">
+                <h3 className="text-center"> Here are your all TODOS</h3>
+                <div className="container">
+                <ul class="list-group">
+                    {this.renderTodos(this.props.allTodos)}
+                </ul>
+                </div>
+                <br/>
+                <div className="text-center ">
+                    <Link className="btn btn-sm btn-secondary" to="/add">Add New Todo</Link>
+                </div>
             </div>
-            <Link to="/add">Add New Todo</Link>
-
-            </div>
-            
-
         );
     }
 }
